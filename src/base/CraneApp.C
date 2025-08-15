@@ -21,7 +21,7 @@ CraneApp::validParams()
   return params;
 }
 
-CraneApp::CraneApp(InputParameters parameters) : MooseApp(parameters)
+CraneApp::CraneApp(const InputParameters & parameters) : MooseApp(parameters)
 {
   CraneApp::registerAll(_factory, _action_factory, _syntax);
 }
@@ -47,8 +47,8 @@ CraneApp::registerAll(Factory & f, ActionFactory & af, Syntax & s)
   s.registerActionSyntax("ChemicalReactionsBase", "ChemicalReactions/Network");
 
   // Zapdos network actions
-//  s.registerActionSyntax("AddZapdosReactions", "ChemicalReactions/ZapdosNetwork");
-//  s.registerActionSyntax("ChemicalReactionsBase", "ChemicalReactions/ZapdosNetwork");
+  //  s.registerActionSyntax("AddZapdosReactions", "ChemicalReactions/ZapdosNetwork");
+  //  s.registerActionSyntax("ChemicalReactionsBase", "ChemicalReactions/ZapdosNetwork");
 
   s.registerActionSyntax("AddScalarReactions", "GlobalReactions/*");
   s.registerActionSyntax("AddZapdosReactions", "Reactions/*");
@@ -66,11 +66,11 @@ CraneApp::registerApps()
 /***************************************************************************************************
  *********************** Dynamic Library Entry Points - DO NOT MODIFY ******************************
  **************************************************************************************************/
- extern "C" void
- CraneApp__registerAll(Factory & f, ActionFactory & af, Syntax & s)
- {
-   CraneApp::registerAll(f, af, s);
- }
+extern "C" void
+CraneApp__registerAll(Factory & f, ActionFactory & af, Syntax & s)
+{
+  CraneApp::registerAll(f, af, s);
+}
 
 extern "C" void
 CraneApp__registerApps()
